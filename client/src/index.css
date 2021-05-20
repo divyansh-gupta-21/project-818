@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg: #242526;
+    --bg-accent: #484a4d;
+    --text-color: #dadce1;
+    --nav-size: 60px;
+    --border: 1px solid #474a4d;
+    --border-radius: 8px;
+    --speed: 200ms;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #bcc0c4;
+    border-radius: 6px;
+    margin: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-track:hover {
+    background: #ebeef1;
+}
+
+.icon-button {
+    --button-size: calc(var(--nav-size) * 0.5);
+    border-radius: 50%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 300ms;
+}
+
+.icon-button:hover {
+    filter: brightness(1.2);
+}
+
+.icon-button svg {
+    fill: var(--text-color);
+    width: 20px;
+    height: 20px;
+}
+
+.dropdown{
+    position: absolute;
+    top: 58px;
+    width:300px;
+    transform: translateX(-60%);
+    padding: 1rem;
+    overflow: hidden;
+    transition: height 200ms ease;
+}
+
+.menu-item{
+    height:50px;
+    display:flex;
+    align-items: center;
+    transition: background var(--speed);
+    padding: 0.5rem;
+}
+
+.icon-right{
+    margin-left: auto;
+}
+
+.menu{
+    width:100%;
+}
+.menu-primary-enter {
+    position: absolute;
+    transform: translateX(-110%);
+}
+
+.menu-primary-enter-active {
+    transform: translateX(0%);
+    transition: all var(--speed) ease;
+}
+
+.menu-primary-exit {
+    position: absolute;
+}
+
+.menu-primary-exit-active {
+    transform: translateX(-110%);
+    transition: all var(--speed) ease;
+}
+
+
+.menu-secondary-enter {
+    transform: translateX(110%);
+}
+
+.menu-secondary-enter-active {
+    transform: translateX(0%);
+    transition: all var(--speed) ease;
+}
+
+.menu-secondary-exit {}
+
+.menu-secondary-exit-active {
+    transform: translateX(110%);
+    transition: all var(--speed) ease;
+}
+
+.settings-tabs{
+    width:calc(100% - 300px);
+    height: calc(100% - 64px);
+}

@@ -1,0 +1,18 @@
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "username":"divyanshg21"
+}
+
+###
+POST http://localhost:4000/token
+Content-Type: application/json
+
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZGl2eWFuc2hnMjEiLCJpYXQiOjE2MjEwNzQ5NTN9.upAZSE_0RpVAEOsYWEq6rgDfuPmIZuXI3pGkSqhp524"
+}
+
+###
+GET http://localhost:4000/samp
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZGl2eWFuc2hnMjEiLCJpYXQiOjE2MjEwNzQ3OTIsImV4cCI6MTYyMTA3NDgwMn0.cCBnNu8hTWLgi5m9ULIot23ciNxaadqDKszcoS05uJY
