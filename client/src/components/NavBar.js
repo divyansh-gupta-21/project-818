@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { BellIcon, MenuIcon, XIcon, CubeTransparentIcon } from '@heroicons/react/outline'
 import ProfileMenu from './profileMenu';
 
 function Navbar(props){
@@ -65,6 +65,8 @@ function Navbar(props){
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
+                <button className={"mx-2 rounded-md py-1 px-3 bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 hover:bg-gray-200 flex focus:outline-none focus:bg-gray-300"}><CubeTransparentIcon className="h-6 w-6 mr-2"/>Get Drops</button>
+
                 {/* Profile dropdown */}
                 <button className="h-10 w-10 rounded-full focus:outline-none mr-6" onClick={handleOpen}>
                     <img className="rounded-full" src={"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"}/>
@@ -74,24 +76,6 @@ function Navbar(props){
               </div>
             </div>
           </div>
-
-          <Disclosure.Panel className="sm:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </Disclosure.Panel>
         </>
       )}
     </Disclosure>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {CSSTransition} from 'react-transition-group';
-import { BellIcon, UserIcon, ArrowLeftIcon, ChevronRightIcon, MoonIcon, QuestionMarkCircleIcon, ColorSwatchIcon, LogoutIcon, MailIcon, ShieldExclamationIcon, ClipboardListIcon, NewspaperIcon, ChipIcon, FilmIcon } from '@heroicons/react/outline'
+import { BellIcon, UserIcon, ArrowLeftIcon, ChevronRightIcon, MoonIcon, QuestionMarkCircleIcon, ColorSwatchIcon, LogoutIcon, MailIcon, ShieldExclamationIcon, ClipboardListIcon, NewspaperIcon, CogIcon, FilmIcon, StarIcon, CashIcon, UserRemoveIcon, AdjustmentsIcon } from '@heroicons/react/outline'
 
 function ProfileMenu(props){
     const [activeMenu, setActiveMenu] = useState('main');
@@ -24,7 +24,7 @@ function ProfileMenu(props){
     }
 
     function handleThemeChange(e){
-        const theme = e.target.innerHTML
+        const theme = e
         localStorage.setItem("theme_color", theme);
         set_theme_color(theme)
     }
@@ -45,7 +45,7 @@ function ProfileMenu(props){
                        </div>
                     </ProfileMenuItem>
                     <hr className="my-3"/>
-                    <ProfileMenuItem goToMenu="settings" leftIcon={<ChipIcon />} rightIcon={<ChevronRightIcon />}>
+                    <ProfileMenuItem goToMenu="settings" leftIcon={<AdjustmentsIcon />} rightIcon={<ChevronRightIcon />}>
                         Settings & privacy
                     </ProfileMenuItem>
                     <ProfileMenuItem goToMenu="help" leftIcon={<QuestionMarkCircleIcon />} rightIcon={<ChevronRightIcon />}>
@@ -54,9 +54,21 @@ function ProfileMenu(props){
                     <ProfileMenuItem goToMenu="display" leftIcon={<MoonIcon />} rightIcon={<ChevronRightIcon />}>
                         Display
                     </ProfileMenuItem>
+                    <hr className="my-2"/>
+                    <ProfileMenuItem linkTo={'/creator/channel'} leftIcon={<UserRemoveIcon />}>
+                        Channel
+                    </ProfileMenuItem>
                     <ProfileMenuItem linkTo={'/creator/dashboard'} leftIcon={<FilmIcon />}>
                         Creator Dashboard
                     </ProfileMenuItem>
+                    <hr className="my-2"/>
+                    <ProfileMenuItem linkTo={'/subscriptions'} leftIcon={<StarIcon />}>
+                        Subscriptions
+                    </ProfileMenuItem>
+                    <ProfileMenuItem linkTo={'/wallet'} leftIcon={<CashIcon />}>
+                        Wallet
+                    </ProfileMenuItem>
+                    <hr className="my-2"/>
                     <ProfileMenuItem leftIcon={<LogoutIcon />}>
                         Log Out
                     </ProfileMenuItem>
@@ -67,7 +79,7 @@ function ProfileMenu(props){
                     <ProfileMenuItem goToMenu="main" leftIcon={<ArrowLeftIcon />}>
                        <span className="font-bold text-lg">Settings & privacy</span>
                     </ProfileMenuItem>
-                    <ProfileMenuItem linkTo={"/settings"} leftIcon={<ChipIcon />}>
+                    <ProfileMenuItem linkTo={"/settings"} leftIcon={<CogIcon />}>
                         Settings
                     </ProfileMenuItem>
                     <ProfileMenuItem leftIcon={<ClipboardListIcon />}>
@@ -142,12 +154,13 @@ function ProfileMenu(props){
                         </span>
                     </a>
                     <a href="#" className="menu-item h-auto rounded-lg dark:text-white">
-                        <span className="font-bold float-left mt-2 mx-2 flex mb-2">
-                            <div className="color bg-yellow-400 text-yellow-400 hover:bg-yellow-500 rounded-full h-10 w-10 mx-1 text-xs pt-10" onClick={handleThemeChange}>yellow</div>
-                            <div className="color bg-red-400 text-red-400 hover:bg-red-500 rounded-full h-10 w-10 mx-1 text-xs pt-10" onClick={handleThemeChange}>red</div>
-                            <div className="color bg-blue-400 text-blue-400 hover:bg-blue-500 rounded-full h-10 w-10 mx-1 text-xs pt-10" onClick={handleThemeChange}>blue</div>
-                            <div className="color bg-green-400 text-green-400 hover:bg-green-500 rounded-full h-10 w-10 mx-1 text-xs pt-10" onClick={handleThemeChange}>green</div>
-                            <div className="color bg-indigo-400 text-indigo-400 hover:bg-indigo-500 rounded-full h-10 w-10 mx-1 text-xs pt-10" onClick={handleThemeChange}>indigo</div>
+                        <span className="font-bold float-left mt-2 -mx-5 flex mb-2">
+                            <div className="color bg-gradient-to-br from-fuchsia-500 to-purple-600 focus:from-purple-600 focus:to-fuchsia-500 focus:outline-none rounded-full h-10 w-10 mx-1 text-xs pt-10" onClick={() => handleThemeChange("bg-gradient-to-br from-fuchsia-500 to-purple-600 focus:from-purple-600 focus:to-fuchsia-500 focus:outline-none")}></div>
+                            <div className="color bg-gradient-to-br from-light-blue-400 to-indigo-500 focus:to-light-blue-400 focus:from-indigo-500 rounded-full h-10 w-10 mx-1 text-xs pt-10 focus:outline-none" onClick={() => handleThemeChange("bg-gradient-to-br from-light-blue-400 to-indigo-500 focus:to-light-blue-400 focus:from-indigo-500 focus:outline-none")}></div>
+                            <div className="color bg-gradient-to-br from-cyan-400 to-light-blue-500 focus:from-light-blue-500 focus:to-cyan-400 rounded-full h-10 w-10 mx-1 text-xs pt-10 focus:outline-none" onClick={() => handleThemeChange("bg-gradient-to-br from-cyan-400 to-light-blue-500 focus:from-light-blue-500 focus:to-cyan-400 focus:outline-none")}></div>
+                            <div className="color bg-gradient-to-br from-green-400 to-cyan-500 focus:from-cyan-500 focus:to-green-400 rounded-full h-10 w-10 mx-1 text-xs pt-10 focus:outline-none" onClick={() => handleThemeChange("bg-gradient-to-br from-green-400 to-cyan-500 focus:from-cyan-500 focus:to-green-400 focus:outline-none")}></div>
+                            <div className="color bg-gradient-to-br from-yellow-400 to-orange-500 focus:from-orange-500 focus:to-yellow-400 rounded-full h-10 w-10 mx-1 text-xs pt-10 focus:outline-none" onClick={() => handleThemeChange("bg-gradient-to-br from-yellow-400 to-orange-500 focus:from-orange-500 focus:to-yellow-400 focus:outline-none")}></div>
+                            <div className="color bg-gradient-to-br from-pink-500 to-rose-500 focus:from-rose-500 focus:to-pink-500 rounded-full h-10 w-10 mx-1 text-xs pt-10 focus:outline-none" onClick={() => handleThemeChange("bg-gradient-to-br from-pink-500 to-rose-500 focus:from-rose-500 focus:to-pink-500 focus:outline-none")}></div>
                         </span>
                     </a>
                 </div>

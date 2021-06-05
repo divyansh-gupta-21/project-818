@@ -57,7 +57,7 @@
     position: absolute;
     top: 58px;
     width:300px;
-    transform: translateX(-60%);
+    transform: translateX(-20%);
     padding: 1rem;
     overflow: hidden;
     transition: height 200ms ease;

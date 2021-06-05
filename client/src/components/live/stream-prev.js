@@ -1,11 +1,12 @@
 import { EyeIcon, ThumbUpIcon, ThumbDownIcon, HeartIcon, StarIcon, UserIcon, ChevronDownIcon, FastForwardIcon, ShareIcon } from '@heroicons/react/outline';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../NavBar';
 import Chat from './Chat';
 import Player from './player';
 import Recommendations from './Recommendations'
+import axios from 'axios';
 
-const stats = {
+const stats_ = {
     title: "Valorant live India",
     viewers: 13657,
     ratings: {
@@ -28,17 +29,34 @@ Vivamus purus ligula, mollis quis metus congue, vestibulum semper nisi. Sed male
 
 function StreamPreview({match}){
     const [themeColor, setTheme] = useState(window.localStorage.getItem("theme_color"))
+    const [stats, setStats] = useState({ratings:{}, tags: [], channel:{}});
+
+    useEffect(() => {
+        try{
+            setInterval(() => {
+                const stream = match.params.stream_id
+                //Info API
+                axios.get(`http://localhost:8000/api/streams/live/${stream}`)
+                .then(response => {
+                    setStats(response.data)
+                    console.log(response.data)
+                })
+            }, 1000)
+        }catch{
+            return
+        }
+    }, [])
 
     return(
         <div className="min-h-screen">
             <Navbar />
             <div className="flex w-full bg-white dark:bg-black px-20 h-auto" style={{"paddingTop": "104px"}}>
                 <div className="w-full bg-white dark:bg-black mx-2 relative">
-                    <Player stream={match.params.stream_id}/>
+                    <Player stream={match.params.stream_id} isLive={stats.isLive}/>
                     <div className="video-info">
                         <h1 className="text-2xl my-3">{stats.title}</h1>
                         <div className="flex w-full -mt-2">
-                            <span className={"text-md font-semibold text-gray-400 flex w-full text-"+themeColor+"-600"}><UserIcon className="w-4 h-4 mt-1" />{numberWithCommas(stats.viewers)} <span className="text-gray-500 font-light"> &nbsp; watching | Started streaming <span className="time_started">2 hours ago</span></span></span>
+                            <span className={"text-md font-semibold text-gray-400 flex w-full text-"+themeColor+"-600"}><UserIcon className="w-4 h-4 mt-1" />{numberWithCommas(stats.viewers || 0)} <span className="text-gray-500 font-light"> &nbsp; watching |<span className="time_started">{stats.isLive ?  "Started streaming " + secondsToHms(stats.duration) : "Streamed " + secondsToHms(stats.duration)} ago</span></span></span>
                             <span className="flex float-right">
                                 <span className="text-md font-semibold text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 cursor-pointer flex mx-2 bg-gray-100 py-1 px-2 rounded">
                                     <ThumbUpIcon className="w-4 h-4 mt-1 mx-1" />
@@ -66,7 +84,7 @@ function StreamPreview({match}){
                                 <span className="text-sm text-gray-400">{numFormatter(stats.channel.followers)} followers</span>
                             </div>
                             <div className="mt-2 mr-2">
-                                <button className={"rounded bg-"+themeColor+"-500 hover:bg-"+themeColor+"-600 px-6 py-1 text-white flex"}><HeartIcon className="w-5 h-5 mt-0.5 mx-1"/> Follow</button>
+                                <button className={"rounded "+themeColor+" px-6 py-1 text-white flex"}><HeartIcon className="w-5 h-5 mt-0.5 mx-1"/> Follow</button>
                             </div>
                             <div className="mt-2">
                                 <button className={"rounded bg-gray-200 hover:bg-gray-300 px-6 py-1 text-black flex dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"}><StarIcon className="w-5 h-5 mt-0.5 mx-1"/> Subscribe</button>
@@ -86,6 +104,22 @@ function StreamPreview({match}){
         </div>
     )
 }
+
+function secondsToHms(d) {
+    d = Number(d);
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour " : " hours ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute " : " minutes ") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+
+    if(h > 0){return hDisplay}
+    if(m > 0) {return mDisplay;}
+    else{return sDisplay; }
+}
+
 
 function numFormatter(num) {
     if(num > 999 && num < 1000000){

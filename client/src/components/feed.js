@@ -10,7 +10,9 @@ function Feed(){
     useEffect(() => {
         axios.get('http://localhost/feed').then(response => {
             const videos = response.data
+            console.log(videos)
             setVideos(videos)
+
         })
     }, [])
 
@@ -45,7 +47,7 @@ function Feed(){
     return(
         <div class="grid grid-cols-3 md:grid-cols-4 sm:grid-cols-1 xs:sm:grid-cols-1 gap-2">
            {videos.map(video => 
-               <a href={"/live/stream-name"} className="cursor-pointer">
+               <a href={"/live/"+video.id} className="cursor-pointer">
                    <Video video={video}/>
                </a>
            )}

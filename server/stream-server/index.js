@@ -20,6 +20,10 @@ const config = {
     allow_origin: '*',
     mediaroot: './media'
   },
+}
+
+/*
+
   trans: {
     ffmpeg: '/usr/bin/ffmpeg',
     tasks: [{
@@ -53,8 +57,7 @@ const config = {
       ]
     }]
   }
-}
-
+  */
 
 var nms = new NodeMediaServer(config)
 nms.run();
@@ -71,18 +74,19 @@ nms.on('postConnect', (id, args, key) => {
 
 nms.on('doneConnect', (id, args) => {});
 
-nms.on('prePublish', (id, StreamPath, args) => {
+nms.on('prePublish', async (id, StreamPath, args) => {
   const streamKey = StreamPath.split('/')[2]
   let session = nms.getSession(id);
 
-  client.connect(err => {
+  await client.connect(async err => {
     const collection = client.db("strixx").collection("streams")
 
-    collection.findOne({
+   await collection.findOne({
         "stream-key": streamKey
       })
       .then(stream => {
         if (stream == null) session.reject()
+        console.log(stream)
         //Verify stream key here
         client.close()
       })

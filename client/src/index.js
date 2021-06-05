@@ -14,7 +14,8 @@ import StreamPreview from './components/live/stream-prev';
 import Settings from './components/Settings';
 
 import Dashboard from './components/creator/Dashboard/index';
-
+import Subscriptions from './components/Subscriptions/index';
+import Channel from './components/creator/Channel/index';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,7 +26,8 @@ ReactDOM.render(
         <Route path="/settings" component={Settings} />
 
         <Route path="/creator/dashboard" component={Dashboard} />
-
+        <Route path="/subscriptions" component={Subscriptions} />
+        <Route path="/creator/channel" component={Channel}/>
         <Route path="/channel/:channel_name">
           <div>
             channel
